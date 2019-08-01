@@ -1,0 +1,21 @@
+<div class="user container">
+  <!-- プロフィール部分 -->
+  <%= render partial: 'users/profile' %>
+  <!-- フォロワーリスト部分 -->
+  <h1>フォロワー</h1>
+  <% if @users.any? %>
+  <ul class="users">
+    <% @users.each do |user| %>
+    <li>
+      <div style="background: url('<%= image_url(user) %>'); background-position: 50%; background-size: cover;" class="image"></div>
+      <%= link_to profile_path(user) do %>
+        <span class="name"><%= user.name %></span>
+      <% end %>
+      <%= link_to user.followed_by?(current_user)? "フォロー解除": "フォローする", follow_path(user.id), class: "button" %>
+    </li>
+    <% end %>
+  </ul>
+  <% else %>
+    <p class="empty">ユーザーが存在しません。</p>
+  <% end %>
+</div>

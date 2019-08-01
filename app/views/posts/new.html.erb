@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="new_post_wrap">
+    <h1>新規Photo投稿</h1>
+    <%= form_for @post do |f| %>
+      <!-- ファイル選択ボタン -->
+      <div class="file_wrap">
+        <%= f.file_field :upload_file %>
+      </div>
+      <!-- 説明文 -->
+      <div class="textarea_wrap">
+        <%= f.text_area :caption, placeholder: "写真に対する説明文を入力" %>
+      </div>
+      <!-- 送信ボタン -->
+      <div class="btn_wrap">
+        <%= f.submit "送信" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="user container">
+  <!-- プロフィール部分 -->
+  <%= render partial: 'users/profile' %>
+  <!-- 投稿画像部分 -->
+  <div class="posts">
+    <ul>
+    <% @posts.each do |post| %>
+      <% post.post_images.each do |post_image| %>
+      <li>
+        <div style="background: url('<%= "/images/#{post_image.name}" %>'); background-repeat: no-repeat; background-position: 50%;"></div>
+      </li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+</div>

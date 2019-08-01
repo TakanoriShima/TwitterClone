@@ -1,0 +1,92 @@
+<div class="top container">
+  <% if @posts.any? %>
+  <ul class="posts">
+    <div><%= page_entries_info @posts %></div>
+    <% @posts.each do |post| %>
+    <li>
+      <!-- 投稿者のアイコン -->
+      <div class="user">
+        <div style="background: url('<%= image_url(post.user) %>'); background-position: center; background-size: cover" class="image"></div>
+        <p><%= link_to post.user.name, profile_path(post.user) %></p>
+      </div>
+      <!-- 投稿画像 -->
+      <% post.post_images.each do |post_image| %>
+      <div class="image_wrap">
+        <%= image_tag "/images/#{post_image.name}" %>
+      </div>
+      <% end %>
+      <!-- テキスト部分 -->
+      <div class="info">
+        <div class="action">
+          <%= link_to like_post_path(post) do %>
+            <i class="fa <%= post.like_from?(current_user)? "fa-heart active" : "fa-heart-o" %>"></i>
+          <% end %>
+          <label for="post-comment-">
+            <i class="fa fa-comment-o"></i>
+          </label>
+          <% if post.user_id == current_user.id %>
+            <%= link_to post_path(post), method: :delete do %>
+              <i class="fa fa-close"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="like">
+          <%
+            @postlikes = PostLike.where("post_id = ?", post.id)
+          %>
+          <p>いいね <%= @postlikes.count %>件</p>
+        </div>
+        <!-- コメント部分 -->
+        <div class="comment">
+          <ul>
+            <!-- 投稿者のキャプション -->
+            <% if post.caption.present? %>
+            <li>
+              <span class="user_name"><%= post.user.name %></span>
+              <span class="caption"><%= post.caption %></span>
+            </li>
+            <% end %>
+            <!-- 画像へのコメント -->
+            <% post.post_comments.each do |post_comment| %>
+            <li>
+              <span class="user_name"><%= post_comment.user.name %></span>
+              <span class="caption"><%= post_comment.comment %></span>
+            </li>
+            <% end %>
+          </ul>
+          <!-- コメント入力部分 -->
+          <div class="text_wrap">
+            <%= form_for post.post_comments.new, url: comment_post_path(post) do |f| %>
+              <div class="field">
+                <%= f.text_field :comment, id: "post-comment-#{post.id}", placeholder: "コメントを入力" %>
+                <%= f.submit "送信" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </li>
+    <% end %>
+    <div><%= paginate @posts %></div>
+  </ul>
+  <% else %>
+  <p class="empty">投稿がありません。</p>
+  <% end %>
+  <!-- おすすめユーザー -->
+  <% if @recommends.any? %>
+  <div class="recommend">
+    <h2>おすすめ</h2>
+    <ul>
+      <% @recommends.each do |user| %>
+      <li>
+        <%= link_to profile_path(user) do %>
+          <img src="<%= image_url(user) %>">
+          <p><%= user.name %></p>
+        <% end %>
+        <%= link_to "フォローする", follow_path(user), class: "button" %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+</div>

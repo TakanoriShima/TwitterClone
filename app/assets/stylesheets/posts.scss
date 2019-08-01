@@ -1,0 +1,50 @@
+// 新規投稿ページ
+.new_post_wrap {
+  width: 80%;
+  background-color: white;
+  border: 2px solid #eee;
+  height: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  textarea {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 15px;
+  }
+  // ファイル選択ボタン
+  .file_wrap {
+    margin-bottom: 10px;
+  }
+  // 説明文
+  .textarea_wrap {
+    border: 1px solid #eee;
+  }
+  // ボタン
+  .btn_wrap {
+    text-align: center;
+    input[type="submit"] {
+      background-color: #ccc;
+      display: block;
+      color: white;
+      border: 1px solid darken(#ccc, 5%);
+      border-radius: 3px;
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(#ccc, 3%);
+      }
+    }
+  }
+}

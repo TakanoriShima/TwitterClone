@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Photo</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      window.setTimeout(function() {
+        $(".alert").slideUp();
+      }, 3000);
+    </script>
+  </body>
+</html>

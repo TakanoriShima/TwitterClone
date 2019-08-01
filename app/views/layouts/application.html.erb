@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Photo</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+  <body class="logined">
+    <header class="global_header">
+      <!-- ロゴ -->
+      <div class="icon">
+        <%= link_to top_path do %>
+          <i class="fa fa-camera"></i>
+        <% end %>
+      </div>
+      <%= link_to top_path do %>
+        <h1 class="logo">Photo</h1>
+      <% end %>
+      <!-- 検索フォーム -->
+      <form class="search">
+        <input type="text" placeholder="検索ワードを入力" name="word" value="">
+      </form>
+      <!-- メニュー -->
+      <ul class="menu">
+        <li>
+          <!-- サインアウト -->
+          <%= link_to sign_out_path do %>
+            <i class="fa fa-sign-out"></i>
+          <% end %>
+        </li>
+        <li>
+          <!-- プロフィールページ -->
+          <%= link_to profile_path(current_user) do %>  
+            <i class="fa fa-user-o"></i>
+          <% end %>
+        </li>
+        <li>
+          <!-- 投稿 -->
+          <%= link_to new_post_path do %>
+            <i class="fa fa-upload"></i>
+          <% end %>
+        </li>
+      </ul>
+    </header>
+    <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        window.setTimeout(function() {
+            $(".alert").slideUp();
+        }, 3000);
+    </script>
+  </body>
+</html>

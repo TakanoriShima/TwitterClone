@@ -1,0 +1,19 @@
+<div class="sign_in">
+  <div class="contents">
+    <div class="sign_in_form">
+      <h1>Photo</h1>
+      <%= form_for @user, url: sign_in_path do |f| %>
+        <div class="field">
+          <%= f.email_field :email, placeholder: "メールアドレス" %>
+        </div>
+        <div class="field">
+          <%= f.password_field :password, placeholder: "パスワード" %>
+        </div>
+        <button>サインインする</button>
+      <% end %>
+    </div>
+    <div class="sign_in_link">
+      <p>アカウントをお持ちですか？ <%= link_to "新規登録する", sign_up_path %></p>
+    </div>
+  </div>
+</div>

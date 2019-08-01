@@ -1,0 +1,29 @@
+  <div class="profile">
+    <div class="image">
+      <div style="background: url('<%= image_url(@user) %>'); background-position: 50%; background-size: cover;"></div>
+    </div>
+    <div class="info">
+      <div class="name">
+        <h1><%= @user.name %></h1>
+        <div class="actions">
+          <% if @user.id == current_user.id %>
+          <div class="edit">
+            <%= link_to "プロフィール編集", profile_edit_path %>
+          </div>
+          <% else %>
+          <div class="follow">
+            <%= link_to @user.followed_by?(current_user)? "フォロー解除": "フォローする", follow_path(@user.id) %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="status">
+        <p class="posts_count">投稿数 <%= @user.posts.length %>件</p>
+        <p class="follower_count"><%= link_to "フォロワー#{@user.followers.length}人", follower_list_path(@user) %></p>
+        <p class="follow_count"><%= link_to "#{@user.follows.length}人をフォロー中", follow_list_path(@user) %></p>
+      </div>
+      <div class="comment">
+        <%= @user.comment %>
+      </div>
+    </div>
+  </div>
